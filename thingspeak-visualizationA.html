@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThingSpeak Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Style to center and resize the chart */
+        #chart-container {
+            width: 90%;
+            max-width: 600px; /* Set max width for the graph */
+            margin: 20px auto; /* Center the graph on the page */
+        }
+        canvas {
+            display: block;
+            width: 100%; /* Ensure it fits within the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Live Data from My ThingSpeak Channel</h1>
+    <p style="text-align: center;">This chart displays real-time data from Field 1 of my private ThingSpeak channel.</p>
+    
+    <!-- Chart container -->
+    <div id="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    
+    <script>
+        // Fetch data from ThingSpeak API
+        fetch("https://api.thingspeak.com/channels/2778481/fields/1.json?api_key=WNNJHZFHUNHW8TVB&results=50")
+            .then(response => response.json())
+            .then(data => {
+                // Extract the data points
+                const feeds = data.feeds;
+                const labels = feeds.map(feed => feed.created_at); // Timestamps
+                const values = feeds.map(feed => parseFloat(feed.field1)); // Field 1 values
+
+                // Create the chart
+                const ctx = document.getElementById('myChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line', // Line chart
+                    data: {
+                        labels: labels, // X-axis labels
+                        datasets: [{
+                            label: 'Field 1 Data',
+                            data: values, // Y-axis data
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderWidth: 2,
+                            pointRadius: 3,
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Timestamp'
+                                },
+                                ticks: {
+                                    autoSkip: true,
+                                    maxTicksLimit: 10
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Value'
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
