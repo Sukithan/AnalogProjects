@@ -1,1 +1,3 @@
-  This is 3 rd semi project analoga and muscle-cramp project
+  This is  the website for our 3 rd semester Analog and muscle-cramp detections Projects
+  
+ 
