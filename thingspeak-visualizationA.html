@@ -6,60 +6,108 @@
     <title>ThingSpeak Data Visualization</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f9f9f9;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background: linear-gradient(to bottom, #e3f2fd, #f1f8e9);
+            color: #333;
+            text-align: center;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1e88e5;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Charts Container */
         .charts-container {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: auto;
+            justify-content: space-between;
+            align-items: flex-start;
             gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
+
+        /* Chart Box Styles */
         .chart-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 2px solid #007bff;
-            border-radius: 8px;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .chart-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* First Chart Custom Size */
+        .chart-large {
+            flex: 2; /* Make the first chart box larger */
+        }
+
         canvas {
-            width: 600px; /* Increased size for the first graph */
-            height: 400px;
+            width: 100%; /* Responsive to the parent box */
+            height: 400px; /* Maintain height consistency */
         }
+
         iframe {
-            width: 400px;
+            width: 100%; /* Responsive to the parent box */
             height: 300px;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            color: #333;
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1565c0;
+            color: #ffffff;
+            font-size: 0.9rem;
         }
-        p {
-            color: #555;
+
+        footer a {
+            color: #ffcc80;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <h1>ThingSpeak Data Visualization</h1>
-    <p>Below are the time-domain chart (real-time data) and MATLAB visualization.</p>
+    <p>Analyze real-time data and MATLAB visualizations side by side</p>
 
+    <!-- Charts Container -->
     <div class="charts-container">
         <!-- Time-Domain Chart -->
-        <div class="chart-box">
+        <div class="chart-box chart-large">
+            <h2 style="font-size: 1.2rem; color: #1e88e5; margin-bottom: 10px;">Time-Domain Chart</h2>
             <canvas id="timeChart"></canvas>
         </div>
 
         <!-- Frequency-Domain MATLAB Visualization -->
         <div class="chart-box">
+            <h2 style="font-size: 1.2rem; color: #1e88e5; margin-bottom: 10px;">Frequency-Domain Analysis</h2>
             <iframe 
                 src="https://thingspeak.mathworks.com/apps/matlab_visualizations/594301" 
                 title="Frequency-Domain Analysis">
@@ -67,6 +115,12 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        Created with ❤ by <a href="#">Your Name</a> | Powered by ThingSpeak
+    </footer>
+
+    <!-- Chart.js Script -->
     <script>
         // Fetch Time-Domain Data (Field 1)
         fetch("https://api.thingspeak.com/channels/2778481/fields/1.json?api_key=WNNJHZFHUNHW8TVB&results=50")
@@ -86,11 +140,11 @@
                         datasets: [{
                             label: 'Time-Domain Data',
                             data: values,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(30, 136, 229, 1)',
+                            backgroundColor: 'rgba(30, 136, 229, 0.2)',
                             borderWidth: 2,
-                            pointRadius: 2,
-                            pointBackgroundColor: 'rgba(75, 192, 192, 1)'
+                            pointRadius: 3,
+                            pointBackgroundColor: 'rgba(30, 136, 229, 1)'
                         }]
                     },
                     options: {
@@ -109,7 +163,7 @@
                                 },
                                 ticks: {
                                     autoSkip: true,
-                                    maxTicksLimit: 5
+                                    maxTicksLimit: 6
                                 }
                             },
                             y: {
