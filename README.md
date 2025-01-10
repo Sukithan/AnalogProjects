@@ -49,6 +49,10 @@ Once the **ESP32 successfully uploads EMG signals** to ThingSpeak, the **custom 
 4️⃣ The data is **displayed in real-time** for analysis.  
 
 ---
+## **Visualization ** 
+![Visualization]()
+
+---
 
 ## **👨‍💻 Contributors**  
 - **🔹 [Thamilezai Ananthakumar](https://github.com/ThamilezaiAnanthakumar)**  
