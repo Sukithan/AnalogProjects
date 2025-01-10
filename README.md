@@ -1,7 +1,7 @@
 
 ---
 
-# **🌐 Web-Based EMG Signal Visualization Oscilloscope **  
+# **🌐 Web-Based EMG Signal Visualization Oscilloscope**  
 
 ## **📌 Project Overview**  
 This project focuses on processing **EMG signals** and visualizing them on a **custom website** using data from **ThingSpeak IoT**. Since **ThingSpeak private channels require a subscription for public access**, we implemented a **backend API** to fetch and display the data seamlessly.  
@@ -50,7 +50,7 @@ Once the **ESP32 successfully uploads EMG signals** to ThingSpeak, the **custom 
 
 ---
 
-## **👨‍💻 Contributors **  
+## **👨‍💻 Contributors**  
 - **🔹 [Thamilezai Ananthakumar](https://github.com/ThamilezaiAnanthakumar)**  
 - **🔹 [Sukithan Thillainathan](https://github.com/Sukithan)**  
  
